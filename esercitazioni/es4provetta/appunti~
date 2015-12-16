@@ -1,0 +1,5 @@
+capacità per numero valori troppo grande
+
+iterativo più veloce --> 2 righe, mi basta sapere fino a i+1 --> matrice 2*c, stessa complessità, memoria tagliata di ordine n
+
+soluzione alternativa O(m) per memoria, uguale di tempo

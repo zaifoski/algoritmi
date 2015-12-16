@@ -1,0 +1,88 @@
+#include <fstream>
+#include <iostream>
+using namespace std;
+
+//implementare un algoritmo di ordinamento nlogn
+//La prima riga contiene N, il numero di interi nell’array La seconda riga contiene l’array, con gli elementi separati da spazio
+// 1 ≤ N ≤ 1000000
+//INPUT
+//5 
+//2 32 12 8 7 
+//OUTPUT
+//2 7 8 12 32
+
+void merge(int array[], int primo, int ultimo, int mezzo);
+void mergeSort(int array[], int primo, int ultimo);
+
+const int MAXN = 1000000;
+int array[MAXN];
+int b[MAXN];
+
+int main(){
+  int n;
+  ifstream in("input.txt");
+  in>>n;
+  for(int i = 0; i<n; i++){
+    in>>array[i];
+  }
+  mergeSort(array,0,n-1);
+  ofstream out("output.txt");
+  for(int i = 0; i<n; i++){
+    out<<array[i]<<" ";
+  }
+  out<<"\n";
+  return 0;
+}
+
+void merge(int array[], int primo, int ultimo, int mezzo){
+
+  int i,j,k,h;
+  i=primo; j=mezzo+1; k=primo;
+
+  while((i<=mezzo) && (j<=ultimo)){
+    if(array[i]<=array[j]){
+      b[k]=array[i];
+      i++;
+    }
+    else{
+      b[k]=array[j];
+      j++;
+    }
+    k++;
+  }
+  ///*
+  while(i<=mezzo){
+    b[k]=array[i];
+    i++;
+    k++;
+  }
+  while(j<=ultimo){
+    b[k]=array[j];
+    j++;
+    k++;
+  }
+  for(k=primo; k<=ultimo; k++){
+    array[k] = b[k];
+  }
+  //*/
+  /*
+  j=ultimo;
+  for(h=mezzo;h>i;h--){
+    array[j] = array[h];
+    j--;
+  }
+  for(j=primo;j<=k-1;j++){
+    array[j]=b[j];
+  }
+  */
+
+}
+
+void mergeSort(int array[], int primo, int ultimo){
+  if(primo<ultimo){
+    int mezzo = ((primo+ultimo)/2);
+    mergeSort(array,primo,mezzo);
+    mergeSort(array,mezzo+1,ultimo);
+    merge(array, primo, ultimo, mezzo);
+  }
+}

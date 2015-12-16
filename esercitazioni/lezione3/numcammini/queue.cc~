@@ -1,0 +1,70 @@
+using namespace std;
+#include <iostream>
+#include "queue.h"
+
+struct node {
+int val;
+node * next;
+};
+
+struct queue 
+{
+  node * tail;
+  node * head;
+};
+
+static queue Q;
+
+
+bool emptyp () 
+{
+  return (Q.head == NULL);
+}
+
+queue init()
+{
+  Q.head = NULL;
+  return Q;
+}
+
+retval enqueue(int n)
+{
+// memo: "new (nothrow) ..." restituisce NULL
+// senza generare eccezioni se l'allocazione non va a buon fine
+  node * np = new (nothrow) node;
+  if (np==NULL)
+    return FAIL;
+  np->val=n;
+  np->next=NULL;
+  if (emptyp()) 
+    Q.head=Q.tail=np;
+  else {
+    Q.tail->next=np;
+    Q.tail=np;
+  }
+  return OK;
+}
+
+retval dequeue(int &n)
+{ 
+  node * first;
+  if (emptyp())
+    return FAIL;
+  first = Q.head;
+  n = first->val;
+  Q.head = Q.head->next;
+  delete first; 
+  return OK;
+}
+
+void print() 
+{ 
+  if (!emptyp()) {
+    node * first=Q.head;
+    do {
+      cout << first->val << endl;
+      first = first->next;
+    } while (first != NULL);
+  }
+}
+

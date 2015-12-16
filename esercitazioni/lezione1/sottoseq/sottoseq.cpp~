@@ -1,0 +1,27 @@
+#include <fstream>
+using namespace std;
+int max(int a,int b){
+  if(a>b)
+    return a;
+  else
+    return b;
+}
+int main(){
+  int max=0;
+  int here=0;
+  ifstream in("input.txt");
+  int A[];
+  while(!in.fail()){
+    int j;
+    in>>j;
+    a[i]=j;
+    i++;
+  }
+  for(int i = 1; i<=n; i++){
+    here = max(here+A[i],0);
+    max = max(here,max);
+  }
+  ofstream out("output.txt");
+  out<<max<<"\n";
+  return 0;
+}

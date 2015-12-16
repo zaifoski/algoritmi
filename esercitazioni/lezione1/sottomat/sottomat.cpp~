@@ -1,0 +1,48 @@
+#include <fstream>
+using namespace std;
+//Data una matrice di interi da R righe e C colonne, trovare il rettangolo
+//al suo interno di somma massima. Stamparne la somma.
+const int DIM = 2000;
+int array[DIM][DIM];
+
+int maxFun(int a,int b){
+  if(a>b)
+    return a;
+  else
+    return b;
+}
+int main(){
+  int max = 0;
+  int here = 0;
+  int r=0;
+  int c=0;
+  ifstream in("input.txt");
+  in>>r>>c;
+  for(int i = 0; i<r; i++){
+    for(int j = 0; j<c; j++){
+      in>>array[i][j];
+    }
+  }
+  int maxR = 0;
+  for(int i = 0; i<r; i++){
+    int maxT = 0;
+    for(int j = 0; j<c; j++){
+      here = maxFun(here+array[i][j],0);
+      maxT = maxFun(here,maxT);
+    }
+    maxR = maxFun(maxR,maxT);
+  }
+  int maxC = 0;
+  for(int i = 0; i<c; i++){
+    int maxT = 0;
+    for(int j = 0; j<r; j++){
+      here = maxFun(here+array[j][i],0);
+      maxT = maxFun(here,maxT);
+    }
+    maxC = maxFun(maxC,maxT);
+  }
+  max = maxFun(maxC,maxR);
+  ofstream out("output.txt");
+  out<<max<<"\n";
+  return 0;
+}

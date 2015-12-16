@@ -1,0 +1,5 @@
+google
+yahoo
+
+---google
+yah-oo---
